@@ -1,0 +1,42 @@
+#ifndef __$__TM_CPP_ALGORITHMS__2025_
+#define __$__TM_CPP_ALGORITHMS__2025_
+#include<iostream>
+#include<iterator>
+namespace algo
+{
+template<class RandomAccessIterator>
+void sort(RandomAccessIterator begin, RandomAccessIterator end)
+{
+RandomAccessIterator y,j,data;
+for(y=begin+1;y!=end;y++)
+{
+typename std::iterator_traits<RandomAccessIterator>::value_type key= *y;
+data=y;
+for(j=y-1;j>=begin && *j>key;j--) *(j+1)=*j;
+*(j+1)=key;
+}
+}
+
+template<class RandomAccessIterator,class Compare>
+void sort(RandomAccessIterator begin, RandomAccessIterator end, Compare comp)
+{
+RandomAccessIterator y,j,data;
+for(y=begin+1;y!=end;y++)
+{
+typename std::iterator_traits<RandomAccessIterator>::value_type key=*y;
+data=y;
+for(j=y-1;j>=begin && comp(*j,key);j--) *(j+1)=*j;
+*(j+1)=key;
+}
+}
+
+template<class RandomAccessIterator>
+void reverse(RandomAccessIterator begin, RandomAccessIterator end)
+{
+int e;
+RandomAccessIterator a,b;
+typename std::iterator_traits<RandomAccessIterator>::difference_type f=std::distance(begin,end);
+for(e=0,a=begin,b=end;e<f;e++,f--,a++,b--) std::iter_swap(a,b);
+}
+}
+#endif
