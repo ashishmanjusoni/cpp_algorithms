@@ -4,6 +4,14 @@
 #include<iterator>
 namespace algo
 {
+
+/**
+Sort the elements in the reage [begin,end) in accending order
+The elements are compared using `operator<`
+`RandomAccessIterator [begin,end)` is an inital and last position of the sequence to be sorted.
+begin will be considered but last last will not be.
+**/
+
 template<class RandomAccessIterator>
 void sort(RandomAccessIterator begin, RandomAccessIterator end)
 {
@@ -16,6 +24,16 @@ for(j=y-1;j>=begin && *j>key;j--) *(j+1)=*j;
 *(j+1)=key;
 }
 }
+
+/**
+Sort the elements in the range [begin,end)
+The elements are compared using `comp`
+`RandomAccessIterator [begin,end)` is an inital and last position of the sequence to be sorted.
+begin will be considered but last last will not be.
+`comp` is a binary function which accepts two elements in the range as argurment
+make comparision between them and return a bool value
+`bool (*)(element1,element2)`
+**/
 
 template<class RandomAccessIterator,class Compare>
 void sort(RandomAccessIterator begin, RandomAccessIterator end, Compare comp)
@@ -30,13 +48,18 @@ for(j=y-1;j>=begin && comp(*j,key);j--) *(j+1)=*j;
 }
 }
 
-template<class RandomAccessIterator>
-void reverse(RandomAccessIterator begin, RandomAccessIterator end)
+/**
+Reverse the order of the elements in the range [begin,end)
+Through the function call `iter_swap` which swaps two iterator elements.
+**/
+
+template<class BidirectionalIterator>
+void reverse(BidirectionalIterator begin, BidirectionalIterator end)
 {
 int e;
-RandomAccessIterator a,b;
-typename std::iterator_traits<RandomAccessIterator>::difference_type f=std::distance(begin,end);
-for(e=0,a=begin,b=end;e<f;e++,f--,a++,b--) std::iter_swap(a,b);
+BidirectionalIterator a,b;
+typename std::iterator_traits<BidirectionalIterator>::difference_type f=std::distance(begin,end);
+for(e=0,a=begin,b=end-1;e<f;e++,f--,a++,b--) std::iter_swap(a,b);
 }
 }
 #endif
