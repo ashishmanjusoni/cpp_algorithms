@@ -1,0 +1,21 @@
+#ifndef __$__TM_CPP_NUMERIC__2025_
+#define __$__TM_CPP_NUMERIC__2025_
+#include<iostream>
+#include<iterator>
+namespace algo
+{
+template<class InputItr, class T>
+T accumulate(InputItr begin, InputItr end, T initial)
+{
+T total;
+total=initial;
+while(begin!=end)
+{
+typename std::iterator_traits<InputItr>::value_type key=*begin;
+total+=key;
+begin++;
+}
+return total;
+}
+}
+#endif

@@ -61,5 +61,24 @@ BidirectionalIterator a,b;
 typename std::iterator_traits<BidirectionalIterator>::difference_type f=std::distance(begin,end);
 for(e=0,a=begin,b=end-1;e<f;e++,f--,a++,b--) std::iter_swap(a,b);
 }
+
+template<class ForwardIterator>
+ForwardIterator min_element(ForwardIterator begin, ForwardIterator end)
+{
+ForwardIterator smallest;
+smallest=begin;
+while(++begin!=end) if(*smallest>*begin) smallest=begin;
+return smallest;
+}
+
+template<class ForwardIterator>
+ForwardIterator max_element(ForwardIterator begin, ForwardIterator end)
+{
+ForwardIterator largest;
+largest=begin;
+while(++begin!=end) if(*largest<*begin) largest=begin;
+return largest;
+}
+
 }
 #endif
