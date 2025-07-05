@@ -25,4 +25,40 @@ Sort the elements in the reage [begin,end) in accending order. The elements are 
 begin,end: is an inital and last position of the sequence to be sorted. The range used is [begin,end) which contains all elemetns between begin and end, including the element pointed by  begin but not pointed by end. (1)(2)
 comp: is a binary function which accepts two elements in the range as argurment make comparision between them and return a bool value (2)
 ```
+### algo::min_element
+````
+template<class ForwardIterator> min_element(ForwardIterator begin, ForwardIterator end);(1)
+template<class ForwardIterator,class Compare> min_element(ForwardIterator begin,ForwardIterator end, Compare comp);(2)
+````
+Returns an iterator pointing to the element with the smallest value in the range [begin,end)
+The comparison performed using `operator<` for first version and using `comp` for second version.
+#### Parameters
+```
+begin,end: is an inital and last position of the sequence to compare. The range used is [begin,end) which contains all elemetns between begin and end, including the element pointed by begin but not pointed by end. (1)(2)
+comp: is a binary function which accepts two elements in the range as argurment make comparision between them and return a bool value (2)
+```
+
+### algo::max_element
+````
+template<class ForwardIterator> max_element(ForwardIterator begin, ForwardIterator end);(1)
+template<class ForwardIterator,class Compare> max_element(ForwardIterator begin,ForwardIterator end, Compare comp);(2)
+````
+Returns an iterator pointing to the element with the largest value in the range [begin,end)
+The comparison performed using `operator>` for first version and using `comp` for second version.
+#### Parameters
+```
+begin,end: is an inital and last position of the sequence to compare. The range used is [begin,end) which contains all elemetns between begin and end, including the element pointed by begin but not pointed by end. (1)(2)
+comp: is a binary function which accepts two elements in the range as argurment make comparision between them and return a bool value (2)
+```
+
+### algo::accumulate
+````
+template<class InputItr, class T> T accumulate(InputItr begin, InputItr end, T initial);
+````
+Compute the sum of the given value initial and elements in the range [begin,end)
+#### Parameters
+```
+begin,end: is an initial and last position of the squence. The range used in [begin,end) which contains all elements between begin and end, including the elemtn pointed by begin but not pointed by end.
+initial: inital value of the accumulate
+```
 
