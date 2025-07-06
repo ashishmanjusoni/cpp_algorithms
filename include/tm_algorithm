@@ -71,12 +71,30 @@ while(++begin!=end) if(*smallest>*begin) smallest=begin;
 return smallest;
 }
 
+template<class ForwardIterator,class Compare>
+ForwardIterator min_element(ForwardIterator begin, ForwardIterator end,Compare comp)
+{
+ForwardIterator smallest;
+smallest=begin;
+while(++begin!=end) if(comp(*smallest,*begin)>0) smallest=begin;
+return smallest;
+}
+
 template<class ForwardIterator>
 ForwardIterator max_element(ForwardIterator begin, ForwardIterator end)
 {
 ForwardIterator largest;
 largest=begin;
 while(++begin!=end) if(*largest<*begin) largest=begin;
+return largest;
+}
+
+template<class ForwardIterator,class Compare>
+ForwardIterator max_element(ForwardIterator begin, ForwardIterator end,Compare comp)
+{
+ForwardIterator largest;
+largest=begin;
+while(++begin!=end) if(comp(*largest,*begin)<0) largest=begin;
 return largest;
 }
 
