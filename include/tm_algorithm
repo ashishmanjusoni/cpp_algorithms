@@ -98,5 +98,67 @@ while(++begin!=end) if(comp(*largest,*begin)<0) largest=begin;
 return largest;
 }
 
+template<class InputIterator,class T>
+InputIterator find(InputIterator first,InputIterator last,const T &val)
+{
+while(++first!=last) if(*first==val) return first;
+return last;
+}
+
+template<class InputIt,class T>
+InputIt lower_bound(InputIt first,InputIt last,T val)
+{
+InputIt it,begin;
+begin=first;
+typename std::iterator_traits<InputIt>::difference_type count,mid;
+count=std::distance(first,last);
+while(count>0)
+{
+it=begin;
+mid=count/2;
+std::advance(it,mid);
+if(*it<val)
+{
+begin=++it;
+count-=(mid+1);
+}
+else count=mid;
+}
+return begin;
+}
+
+template<class InputIt,class T>
+InputIt upper_bound(InputIt first,InputIt last ,T val)
+{
+InputIt it,begin;
+begin=first;
+typename std::iterator_traits<InputIt>::difference_type count,mid;
+count=std::distance(first,last);
+while(count>0)
+{
+it=begin;
+mid=count/2;
+std::advance(it,mid);
+if(!(val<*it))
+{
+begin=++it;
+count-=mid+1;
+}
+else count=mid;
+}
+return begin;
+}
+
+template<class InputIt>
+typename std::iterator_traits<InputIt>::difference_type count(InputIt first,InputIt last)
+{
+typename std::iterator_traits<InputIt>::difference_type size=0;
+while(first!=last)
+{
+size++;
+++first;
+}
+return size;
+}
 }
 #endif
