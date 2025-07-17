@@ -192,6 +192,20 @@ else count=mid;
 return begin;
 }
 
+template<class InputIt,class T>
+bool binary_search(InputIt first,InputIt last,T val)
+{
+InputIt it=lower_bound(first,last);
+return (it!=last) && !(val<*it);
+}
+
+template<class InputIt,class T,class Compare>
+bool binary_search(InputIt first,InputIt last,T val,Compare comp)
+{
+Input it=lower_bound(first,last,comp);
+return (it!=last) && !(comp(val,*it)<0);
+}
+
 template<class InputIt>
 typename std::iterator_traits<InputIt>::difference_type count(InputIt first,InputIt last)
 {
@@ -203,5 +217,6 @@ size++;
 }
 return size;
 }
+
 }
 #endif
