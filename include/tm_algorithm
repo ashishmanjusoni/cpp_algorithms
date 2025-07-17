@@ -127,6 +127,27 @@ else count=mid;
 return begin;
 }
 
+template<class InputIt,class T,class Compare>
+InputIt lower_bound(InputIt first,InputIt last,T val,Compare comp)
+{
+InputIt it,begin;
+begin=first;
+typename std::iterator::traits<InputIt>::difference_type count,mid;
+count=std::distance(first,last);
+while(count>0)
+{
+it=begin;
+mid=count/2;
+if(comp(*it,val)<0)
+{
+begin=++it;
+count-=mid+1;
+}
+else count=mid;
+}
+return begin;
+}
+
 template<class InputIt,class T>
 InputIt upper_bound(InputIt first,InputIt last ,T val)
 {
@@ -140,6 +161,28 @@ it=begin;
 mid=count/2;
 std::advance(it,mid);
 if(!(val<*it))
+{
+begin=++it;
+count-=mid+1;
+}
+else count=mid;
+}
+return begin;
+}
+
+template<class InputIt,class T, Compare comp>
+InputIt upper_bound(InputIt first,InputIt last,T val,Compare comp)
+{
+InputIt it,begin;
+begin=first;
+typename std::iterator::traits<InputIt>::difference_type count,mid;
+count=std::distance(first,last);
+while(count>0)
+{
+it=begin;
+mid=count/2;
+std::advance(it,mid);
+if(!(comp(val,*it)<0))
 {
 begin=++it;
 count-=mid+1;
