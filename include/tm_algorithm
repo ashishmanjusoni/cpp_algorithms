@@ -1,7 +1,7 @@
 #ifndef __$__TM_CPP_ALGORITHMS__2025_
 #define __$__TM_CPP_ALGORITHMS__2025_
-#include<iostream>
 #include<iterator>
+
 namespace algo
 {
 
@@ -132,13 +132,14 @@ InputIt lower_bound(InputIt first,InputIt last,T val,Compare comp)
 {
 InputIt it,begin;
 begin=first;
-typename std::iterator::traits<InputIt>::difference_type count,mid;
+typename std::iterator_traits<InputIt>::difference_type count,mid;
 count=std::distance(first,last);
 while(count>0)
 {
 it=begin;
 mid=count/2;
-if(comp(*it,val)<0)
+std::advance(it,mid);
+if(comp(*it,val))
 {
 begin=++it;
 count-=mid+1;
@@ -170,19 +171,19 @@ else count=mid;
 return begin;
 }
 
-template<class InputIt,class T, Compare comp>
+template<class InputIt,class T, class Compare>
 InputIt upper_bound(InputIt first,InputIt last,T val,Compare comp)
 {
 InputIt it,begin;
 begin=first;
-typename std::iterator::traits<InputIt>::difference_type count,mid;
+typename std::iterator_traits<InputIt>::difference_type count,mid;
 count=std::distance(first,last);
 while(count>0)
 {
 it=begin;
 mid=count/2;
 std::advance(it,mid);
-if(!(comp(val,*it)<0))
+if(!comp(val,*it))
 {
 begin=++it;
 count-=mid+1;
@@ -195,15 +196,45 @@ return begin;
 template<class InputIt,class T>
 bool binary_search(InputIt first,InputIt last,T val)
 {
-InputIt it=lower_bound(first,last);
-return (it!=last) && !(val<*it);
+InputIt it,begin;
+begin=first;
+typename std::iterator_traits<InputIt>::difference_type count,mid;
+count=std::distance(first,last);
+while(count>0)
+{
+it=begin;
+mid=count/2;
+std::advance(it,mid);
+if(*it<val)
+{
+begin=++it;
+count-=mid+1;
+}
+else count=mid;
+}
+return (begin!=last) && !(val<*begin);
 }
 
 template<class InputIt,class T,class Compare>
 bool binary_search(InputIt first,InputIt last,T val,Compare comp)
 {
-Input it=lower_bound(first,last,comp);
-return (it!=last) && !(comp(val,*it)<0);
+InputIt it,begin;
+begin=first;
+typename std::iterator_traits<InputIt>::difference_type count,mid;
+count=std::distance(first,last);
+while(count>0)
+{
+it=begin;
+mid=count/2;
+std::advance(it,mid);
+if(comp(*it,val))
+{
+begin=++it;
+count-=mid+1;
+}
+else count=mid;
+}
+return (begin!=last) && !(comp(val,*begin)<0);
 }
 
 template<class InputIt>
@@ -217,6 +248,5 @@ size++;
 }
 return size;
 }
-
 }
 #endif
